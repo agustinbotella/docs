@@ -1,0 +1,123 @@
+---
+title: List Campaigns
+api: GET /campaigns
+description: Retrieve a paginated list of your campaigns.
+---
+
+Returns simplified campaign data — `id`, `name`, and `status` — for all campaigns belonging to your team. Use the `id` values when creating or updating contacts.
+
+## Query Parameters
+
+<ParamField query="page" type="number" default="1">
+  Page number for pagination.
+</ParamField>
+
+<ParamField query="limit" type="number" default="10">
+  Number of campaigns to return per page.
+</ParamField>
+
+<ParamField query="status" type="string">
+  Filter by campaign status. Accepted values: `active`, `paused`.
+</ParamField>
+
+<ParamField query="search" type="string">
+  Search campaigns by name. Case-insensitive partial match.
+</ParamField>
+
+## Response
+
+<ResponseField name="data" type="array">
+  Array of campaign objects.
+
+  <Expandable title="Campaign object">
+    <ResponseField name="id" type="string (UUID)">
+      Unique identifier for the campaign. Use this when creating or updating contacts.
+    </ResponseField>
+    <ResponseField name="name" type="string">
+      Campaign display name.
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Campaign status: `active` or `paused`.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="pagination" type="object">
+  Pagination metadata.
+
+  <Expandable title="Pagination fields">
+    <ResponseField name="total" type="number">
+      Total number of campaigns matching the query.
+    </ResponseField>
+    <ResponseField name="totalPages" type="number">
+      Total number of pages.
+    </ResponseField>
+    <ResponseField name="currentPage" type="number">
+      Current page number.
+    </ResponseField>
+    <ResponseField name="limit" type="number">
+      Items per page.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X GET "https://api.guayaba.ai/campaigns?status=active" \
+  -H "X-API-Key: gua_a1b2c3d4_your-api-key-here"
+```
+
+```javascript Node.js
+const response = await fetch('https://api.guayaba.ai/campaigns?status=active', {
+  headers: {
+    'X-API-Key': 'gua_a1b2c3d4_your-api-key-here'
+  }
+});
+
+const data = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://api.guayaba.ai/campaigns',
+    params={'status': 'active'},
+    headers={'X-API-Key': 'gua_a1b2c3d4_your-api-key-here'}
+)
+
+data = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200 OK
+{
+  "data": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "Q1 Outreach",
+      "status": "active"
+    },
+    {
+      "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+      "name": "Follow-up Campaign",
+      "status": "paused"
+    }
+  ],
+  "pagination": {
+    "total": 5,
+    "totalPages": 1,
+    "currentPage": 1,
+    "limit": 10
+  }
+}
+```
+
+```json 401 Unauthorized
+{
+  "error": "Unauthorized",
+  "message": "Invalid or missing API key"
+}
+```
+</ResponseExample>

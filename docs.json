@@ -1,0 +1,76 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Guayaba AI",
+  "colors": {
+    "primary": "#16A34A",
+    "light": "#4ADE80",
+    "dark": "#15803D"
+  },
+  "favicon": "/favicon.svg",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "authentication"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Campaigns",
+            "pages": [
+              "api-reference/campaigns/list"
+            ]
+          },
+          {
+            "group": "Contacts",
+            "pages": [
+              "api-reference/contacts/statuses",
+              "api-reference/contacts/list",
+              "api-reference/contacts/create",
+              "api-reference/contacts/update"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "guayaba.ai",
+        "href": "https://guayaba.ai"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get API Key",
+      "href": "https://app.guayaba.ai/api-keys"
+    }
+  },
+  "api": {
+    "baseUrl": "https://api.guayaba.ai",
+    "auth": {
+      "method": "key",
+      "name": "X-API-Key"
+    }
+  },
+  "footer": {
+    "socials": {
+      "website": "https://guayaba.ai"
+    }
+  }
+}
