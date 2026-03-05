@@ -45,9 +45,9 @@
     {
       "group": "Contacts",
       "pages": [
-        "api-reference/contacts/create",
-        "api-reference/contacts/list",
         "api-reference/contacts/statuses",
+        "api-reference/contacts/list",
+        "api-reference/contacts/create",
         "api-reference/contacts/update"
       ]
     }
