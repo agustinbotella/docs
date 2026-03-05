@@ -1,11 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Guayaba AI",
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "favicon": "/favicon.svg",
   "colors": {
     "primary": "#16A34A",
     "light": "#4ADE80",
@@ -23,7 +18,7 @@
   ],
   "topbarCtaButton": {
     "name": "Get API Key",
-    "url": "https://app.guayaba.ai/settings/api"
+    "url": "https://app.guayaba.ai/api-keys"
   },
   "api": {
     "baseUrl": "https://api.guayaba.ai",
