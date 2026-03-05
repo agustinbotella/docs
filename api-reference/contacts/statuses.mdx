@@ -1,0 +1,118 @@
+---
+title: List Contact Statuses
+api: GET /contacts/statuses
+description: Retrieve all contact statuses configured for your team.
+---
+
+Returns all contact statuses available for your team. Use the `name` field values when filtering contacts via [List Contacts](/api-reference/contacts/list) or updating a contact via [Update Contact](/api-reference/contacts/update).
+
+## Response
+
+Returns an array of status objects.
+
+<ResponseField name="name" type="string">
+  The status identifier. Use this value in filter and update requests.
+</ResponseField>
+
+<ResponseField name="label" type="string">
+  Human-readable display name shown in the Guayaba dashboard.
+</ResponseField>
+
+<ResponseField name="description" type="string or null">
+  Optional description of the status.
+</ResponseField>
+
+<ResponseField name="color" type="string">
+  Hex color code used to represent this status in the UI.
+</ResponseField>
+
+<ResponseField name="isTerminal" type="boolean">
+  If `true`, contacts in this status will **not** receive any scheduled calls, SMS, or WhatsApp messages.
+</ResponseField>
+
+<ResponseField name="isSystem" type="boolean">
+  If `true`, this is a built-in system status that cannot be deleted.
+</ResponseField>
+
+<ResponseField name="excludeFromStats" type="boolean">
+  If `true`, contacts with this status are excluded from campaign statistics.
+</ResponseField>
+
+<ResponseField name="displayOrder" type="number">
+  Numeric order used to render statuses in the dashboard UI.
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X GET "https://api.guayaba.ai/contacts/statuses" \
+  -H "X-API-Key: gua_a1b2c3d4_your-api-key-here"
+```
+
+```javascript Node.js
+const response = await fetch('https://api.guayaba.ai/contacts/statuses', {
+  headers: {
+    'X-API-Key': 'gua_a1b2c3d4_your-api-key-here'
+  }
+});
+
+const statuses = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://api.guayaba.ai/contacts/statuses',
+    headers={'X-API-Key': 'gua_a1b2c3d4_your-api-key-here'}
+)
+
+statuses = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200 OK
+[
+  {
+    "id": "a1b2c3d4-0000-0000-0000-000000000001",
+    "name": "active",
+    "label": "Active",
+    "description": null,
+    "color": "#10B981",
+    "isTerminal": false,
+    "isSystem": true,
+    "excludeFromStats": false,
+    "displayOrder": 0
+  },
+  {
+    "id": "a1b2c3d4-0000-0000-0000-000000000002",
+    "name": "fulfilled",
+    "label": "Fulfilled",
+    "description": null,
+    "color": "#6366F1",
+    "isTerminal": true,
+    "isSystem": true,
+    "excludeFromStats": false,
+    "displayOrder": 2
+  },
+  {
+    "id": "a1b2c3d4-0000-0000-0000-000000000003",
+    "name": "paused",
+    "label": "Paused",
+    "description": null,
+    "color": "#F59E0B",
+    "isTerminal": true,
+    "isSystem": false,
+    "excludeFromStats": false,
+    "displayOrder": 3
+  }
+]
+```
+
+```json 401 Unauthorized
+{
+  "error": "Unauthorized",
+  "message": "Invalid or missing API key"
+}
+```
+</ResponseExample>

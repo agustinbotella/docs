@@ -1,0 +1,78 @@
+---
+title: Authentication & Rate Limiting
+description: How to authenticate your requests and stay within rate limits.
+---
+
+## API Keys
+
+All requests to the Guayaba API must be authenticated using an API key passed in the `X-API-Key` header.
+
+```bash
+curl https://api.guayaba.ai/contacts \
+  -H "X-API-Key: gua_a1b2c3d4_your-api-key-here"
+```
+
+You can generate and manage API keys from your [dashboard settings](https://app.guayaba.ai/settings/api).
+
+<Note>
+  API keys follow the format `gua_xxxxxxxx_...`. Keep your key secret — treat it like a password and never expose it in client-side code or public repositories.
+</Note>
+
+---
+
+## Rate Limiting
+
+API requests are rate-limited per key to ensure fair usage and platform stability.
+
+| Endpoint Type | Limit | Window |
+|---------------|-------|--------|
+| Read (`GET`) | 100 requests | 1 minute |
+| Write (`POST`) | 30 requests | 1 minute |
+
+### Rate Limit Headers
+
+Every API response includes these headers so you can monitor your usage:
+
+| Header | Description |
+|--------|-------------|
+| `X-RateLimit-Limit` | Maximum requests allowed in the current window |
+| `X-RateLimit-Remaining` | Requests remaining in the current window |
+| `X-RateLimit-Reset` | Unix timestamp (seconds) when the window resets |
+
+### Handling 429 Errors
+
+When you exceed the rate limit, the API returns a `429 Too Many Requests` response. The `Retry-After` header tells you exactly how many seconds to wait.
+
+```json
+{
+  "error": "Too many requests",
+  "message": "Rate limit exceeded. Try again in 45 seconds.",
+  "retryAfter": 45
+}
+```
+
+<Tip>
+  Check `X-RateLimit-Remaining` proactively in your integration. If it drops to 0, pause requests and wait until `X-RateLimit-Reset` before retrying.
+</Tip>
+
+---
+
+## Error Responses
+
+All errors follow a consistent format:
+
+```json
+{
+  "error": "Error description",
+  "message": "Detailed error message"
+}
+```
+
+| Status Code | Meaning |
+|-------------|---------|
+| `400` | **Bad Request** — Validation error, missing required fields, or invalid data |
+| `401` | **Unauthorized** — Invalid or missing API key |
+| `404` | **Not Found** — Contact or campaign not found |
+| `429` | **Too Many Requests** — Rate limit exceeded |
+| `500` | **Internal Server Error** — Something went wrong on our end |
+| `503` | **Service Unavailable** — Temporary system issue; retry after a short wait |
