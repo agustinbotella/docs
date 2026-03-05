@@ -28,12 +28,17 @@
         ]
       },
       {
+        "group": "Statuses",
+        "pages": [
+          "api-reference/contacts/statuses"
+        ]
+      },
+      {
         "group": "Contacts",
         "pages": [
-          "api-reference/contacts/statuses",
           "api-reference/contacts/list",
           "api-reference/contacts/create",
-          "api-reference/contacts/update"
+          "api-reference/contacts/update-by-id"
         ]
       }
     ]
@@ -52,10 +57,12 @@
     }
   },
   "api": {
-    "baseUrl": "https://api.guayaba.ai",
-    "auth": {
-      "method": "key",
-      "name": "X-API-Key"
+    "mdx": {
+      "server": "https://api.guayaba.ai",
+      "auth": {
+        "method": "key",
+        "name": "X-API-Key"
+      }
     }
   },
   "footer": {
