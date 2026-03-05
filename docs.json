@@ -13,37 +13,27 @@
     "dark": "/logo/dark.svg"
   },
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "index",
-              "authentication"
-            ]
-          }
+        "group": "Getting Started",
+        "pages": [
+          "index",
+          "authentication"
         ]
       },
       {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "Campaigns",
-            "pages": [
-              "api-reference/campaigns/list"
-            ]
-          },
-          {
-            "group": "Contacts",
-            "pages": [
-              "api-reference/contacts/statuses",
-              "api-reference/contacts/list",
-              "api-reference/contacts/create",
-              "api-reference/contacts/update"
-            ]
-          }
+        "group": "Campaigns",
+        "pages": [
+          "api-reference/campaigns/list"
+        ]
+      },
+      {
+        "group": "Contacts",
+        "pages": [
+          "api-reference/contacts/statuses",
+          "api-reference/contacts/list",
+          "api-reference/contacts/create",
+          "api-reference/contacts/update"
         ]
       }
     ]
