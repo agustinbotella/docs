@@ -1,6 +1,7 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "Guayaba AI",
+  "favicon": "/favicon.svg",
   "colors": {
     "primary": "#16A34A",
     "light": "#4ADE80",
