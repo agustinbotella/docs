@@ -38,7 +38,8 @@
         "pages": [
           "api-reference/contacts/list",
           "api-reference/contacts/create",
-          "api-reference/contacts/update-by-id"
+          "api-reference/contacts/update-by-id",
+          "api-reference/contacts/fulfill"
         ]
       }
     ]

@@ -1,0 +1,104 @@
+---
+title: Fulfill Contact
+api: POST /contacts/fulfill
+description: Mark a contact as fulfilled by phone number.
+---
+
+Marks a contact as fulfilled by their phone number. This cancels all scheduled outreach (calls, SMS, WhatsApp messages, and triggers) and sets the contact's status to `fulfilled`.
+
+<Note>
+  This endpoint requires an `X-API-Key` header. See [Authentication](/authentication) for details.
+</Note>
+
+## Request Body
+
+<ParamField body="phone" type="string" required>
+  Phone number of the contact to fulfill, in E.164 format (e.g., `+11234567890`).
+</ParamField>
+
+## Behavior Notes
+
+<AccordionGroup>
+  <Accordion title="Scheduled outreach is cancelled">
+    All pending calls, SMS, WhatsApp messages, and triggers for this contact are immediately cancelled.
+  </Accordion>
+  <Accordion title="Fulfilled timestamp">
+    The contact's status is set to `fulfilled` and the `fulfilledAt` timestamp is recorded automatically.
+  </Accordion>
+</AccordionGroup>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Always `true` on a successful request.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Human-readable confirmation message.
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl -X POST https://api.guayaba.ai/contacts/fulfill \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: gua_a1b2c3d4_your-api-key-here" \
+  -d '{
+    "phone": "+11234567890"
+  }'
+```
+
+```javascript Node.js
+const response = await fetch('https://api.guayaba.ai/contacts/fulfill', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'gua_a1b2c3d4_your-api-key-here'
+  },
+  body: JSON.stringify({
+    phone: '+11234567890'
+  })
+});
+
+const data = await response.json();
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    'https://api.guayaba.ai/contacts/fulfill',
+    headers={
+        'Content-Type': 'application/json',
+        'X-API-Key': 'gua_a1b2c3d4_your-api-key-here'
+    },
+    json={
+        'phone': '+11234567890'
+    }
+)
+
+data = response.json()
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200 OK
+{
+  "success": true,
+  "message": "Contact marked as fulfilled successfully"
+}
+```
+
+```json 400 Bad Request
+{
+  "error": "Validation error",
+  "message": "Invalid phone number"
+}
+```
+
+```json 404 Not Found
+{
+  "error": "Not found",
+  "message": "Contact not found"
+}
+```
+</ResponseExample>
