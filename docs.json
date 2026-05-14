@@ -42,6 +42,12 @@
           "api-reference/contacts/update-by-id",
           "api-reference/contacts/fulfill"
         ]
+      },
+      {
+        "group": "Splitters",
+        "pages": [
+          "api-reference/splitters/send-contact"
+        ]
       }
     ]
   },
